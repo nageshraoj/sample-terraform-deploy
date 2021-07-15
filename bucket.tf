@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "s3bucket" {
     index_document = "index.html"
   }
 
-  policy = jsonencoder({
+  policy = jsonencode({
   "Id": "Policy1626330150067",
   "Version": "2012-10-17",
   "Statement": [
