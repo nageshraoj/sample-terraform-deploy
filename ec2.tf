@@ -1,10 +1,10 @@
 resource "aws_instance" "demoec2" {
-  ami = data.aws_ami.demoami.id 
-  instance_type = var.ec2type
-  subnet_id = aws_subnet.demosubnet.id
-  vpc_security_group_ids = [ aws_security_group.demosg.id ]
-  key_name = "nagesh"
-  user_data = <<EOF
+  ami                    = data.aws_ami.demoami.id
+  instance_type          = var.ec2type
+  subnet_id              = aws_subnet.demosubnet.id
+  vpc_security_group_ids = [aws_security_group.demosg.id]
+  key_name               = "nagesh"
+  user_data              = <<EOF
     #!/bin/bash
     sudo yum update -y 
     sudo yum install -y
@@ -13,15 +13,15 @@ resource "aws_instance" "demoec2" {
   EOF
 
   connection {
-    type = "ssh"
-    host = self.public_ip 
-    user = "ec2-user"
-    password = ""
+    type        = "ssh"
+    host        = self.public_ip
+    user        = "ec2-user"
+    password    = ""
     private_key = file("nagesh.pem")
   }
 
   provisioner "file" {
-    source = "./demoapp/"
+    source      = "./demoapp/"
     destination = "/home/ec2-user"
   }
 
