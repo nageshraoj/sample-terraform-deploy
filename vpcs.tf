@@ -1,5 +1,5 @@
 resource "aws_vpc" "demovpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.vpc_cider_range
   tags = {
     "Name" = "Demo VPC"
   }
@@ -7,7 +7,7 @@ resource "aws_vpc" "demovpc" {
 
 resource "aws_subnet" "demosubnet" {
   vpc_id                  = aws_vpc.demovpc.id
-  cidr_block              = "10.0.0.0/24"
+  cidr_block              = var.subnet_cider_range
   map_public_ip_on_launch = true
   tags = {
     "Name" = "Demo Subnet"
